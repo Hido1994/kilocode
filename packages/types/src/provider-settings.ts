@@ -34,6 +34,7 @@ import {
 export const providerNames = [
 	"anthropic",
 	"claude-code",
+	"cortecs",
 	"glama",
 	"openrouter",
 	"bedrock",
@@ -134,6 +135,12 @@ const anthropicSchema = apiModelIdProviderModelSchema.extend({
 const claudeCodeSchema = apiModelIdProviderModelSchema.extend({
 	claudeCodePath: z.string().optional(),
 	claudeCodeMaxOutputTokens: z.number().int().min(1).max(200000).optional(),
+})
+
+const cortecsSchema = baseProviderSettingsSchema.extend({
+	cortecsBaseUrl: z.string().optional(),
+	cortecsApiKey: z.string().optional(),
+	cortecsModelId: z.string().optional(),
 })
 
 const glamaSchema = baseProviderSettingsSchema.extend({
@@ -397,6 +404,7 @@ export const providerSettingsSchemaDiscriminated = z.discriminatedUnion("apiProv
 	anthropicSchema.merge(z.object({ apiProvider: z.literal("anthropic") })),
 	claudeCodeSchema.merge(z.object({ apiProvider: z.literal("claude-code") })),
 	glamaSchema.merge(z.object({ apiProvider: z.literal("glama") })),
+	cortecsSchema.merge(z.object({ apiProvider: z.literal("cortecs") })),
 	openRouterSchema.merge(z.object({ apiProvider: z.literal("openrouter") })),
 	bedrockSchema.merge(z.object({ apiProvider: z.literal("bedrock") })),
 	vertexSchema.merge(z.object({ apiProvider: z.literal("vertex") })),
@@ -441,6 +449,7 @@ export const providerSettingsSchema = z.object({
 	apiProvider: providerNamesSchema.optional(),
 	...anthropicSchema.shape,
 	...claudeCodeSchema.shape,
+	...cortecsSchema.shape,
 	...glamaSchema.shape,
 	...openRouterSchema.shape,
 	...bedrockSchema.shape,
@@ -496,6 +505,7 @@ export const PROVIDER_SETTINGS_KEYS = providerSettingsSchema.keyof().options
 
 export const MODEL_ID_KEYS: Partial<keyof ProviderSettings>[] = [
 	"apiModelId",
+	"cortecsModelId",
 	"glamaModelId",
 	"openRouterModelId",
 	"openAiModelId",
@@ -624,6 +634,7 @@ export const MODELS_BY_PROVIDER: Record<
 	zai: { id: "zai", label: "Zai", models: Object.keys(internationalZAiModels) },
 
 	// Dynamic providers; models pulled from the respective APIs.
+	cortecs: { id: "cortecs", label: "cortecs", models: [] },
 	glama: { id: "glama", label: "Glama", models: [] },
 	huggingface: { id: "huggingface", label: "Hugging Face", models: [] },
 	litellm: { id: "litellm", label: "LiteLLM", models: [] },
@@ -640,6 +651,7 @@ export const MODELS_BY_PROVIDER: Record<
 }
 
 export const dynamicProviders = [
+	"cortecs",
 	"glama",
 	"huggingface",
 	"litellm",

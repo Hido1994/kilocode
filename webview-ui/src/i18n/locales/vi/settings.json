@@ -265,6 +265,8 @@
 		},
 		"getRequestyApiKey": "Lấy khóa API Requesty",
 		"getRequestyBaseUrl": "URL cơ sở",
+		"cortecsApiKey": "Khóa API cortecs",
+		"getCortecsApiKey": "Lấy khóa API cortecs",
 		"requestyUseCustomBaseUrl": "Sử dụng URL cơ sở tùy chỉnh",
 		"openRouterTransformsText": "Nén lời nhắc và chuỗi tin nhắn theo kích thước ngữ cảnh (<a>OpenRouter Transforms</a>)",
 		"anthropicApiKey": "Khóa API Anthropic",

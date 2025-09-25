@@ -265,6 +265,8 @@
 		},
 		"getRequestyApiKey": "Dapatkan Requesty API Key",
 		"getRequestyBaseUrl": "Base URL",
+		"cortecsApiKey": "cortecs API Key",
+		"getCortecsApiKey": "Dapatkan cortecs API Key",
 		"requestyUseCustomBaseUrl": "Gunakan URL dasar khusus",
 		"openRouterTransformsText": "Kompres prompt dan rantai pesan ke ukuran konteks (<a>OpenRouter Transforms</a>)",
 		"anthropicApiKey": "Anthropic API Key",

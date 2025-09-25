@@ -26,6 +26,7 @@ import { cerebrasModels } from "@roo-code/types"
 // kilocode_change end
 
 import { getDeepInfraModels } from "./deepinfra"
+import { getCortecsModels } from "./cortecs"
 const memoryCache = new NodeCache({ stdTTL: 5 * 60, checkperiod: 5 * 60 })
 
 export /*kilocode_change*/ async function writeModels(router: RouterName, data: ModelRecord) {
@@ -76,6 +77,9 @@ export const getModels = async (options: GetModelsOptions): Promise<ModelRecord>
 				break
 			case "glama":
 				models = await getGlamaModels()
+				break
+			case "cortecs":
+				models = await getCortecsModels(options.baseUrl, options.apiKey)
 				break
 			case "unbound":
 				// Unbound models endpoint requires an API key to fetch application specific models

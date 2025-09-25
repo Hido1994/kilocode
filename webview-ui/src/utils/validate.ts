@@ -37,6 +37,11 @@ function validateModelsAndKeysProvided(apiConfiguration: ProviderSettings): stri
 				return i18next.t("settings:validation.apiKey")
 			}
 			break
+		case "cortecs":
+			if (!apiConfiguration.cortecsApiKey) {
+				return i18next.t("settings:validation.apiKey")
+			}
+			break
 		case "unbound":
 			if (!apiConfiguration.unboundApiKey) {
 				return i18next.t("settings:validation.apiKey")
@@ -206,6 +211,8 @@ function getModelIdForProvider(apiConfiguration: ProviderSettings, provider: str
 			return apiConfiguration.openRouterModelId
 		case "glama":
 			return apiConfiguration.glamaModelId
+		case "cortecs":
+			return apiConfiguration.cortecsModelId
 		case "unbound":
 			return apiConfiguration.unboundModelId
 		case "requesty":
@@ -283,6 +290,9 @@ export function validateModelId(apiConfiguration: ProviderSettings, routerModels
 			break
 		case "glama":
 			modelId = apiConfiguration.glamaModelId
+			break
+		case "cortecs":
+			modelId = apiConfiguration.cortecsModelId
 			break
 		case "unbound":
 			modelId = apiConfiguration.unboundModelId

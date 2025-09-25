@@ -271,6 +271,8 @@
 		},
 		"getRequestyApiKey": "Отримати ключ API Requesty",
 		"getRequestyBaseUrl": "Базовий URL",
+		"cortecsApiKey": "Ключ API cortecs",
+		"getCortecsApiKey": "Отримати ключ API cortecs",
 		"requestyUseCustomBaseUrl": "Використовувати власний базовий URL",
 		"openRouterTransformsText": "Стискати підказки та ланцюжки повідомлень до розміру контексту (<a>Перетворення OpenRouter</a>)",
 		"anthropicApiKey": "Ключ API Anthropic",

@@ -268,6 +268,8 @@
 		},
 		"getRequestyApiKey": "احصل على مفتاح Requesty",
 		"getRequestyBaseUrl": "رابط الأساس",
+		"cortecsApiKey": "مفتاح cortecs",
+		"getCortecsApiKey": "احصل على مفتاح cortecs",
 		"requestyUseCustomBaseUrl": "استخدم رابط أساس مخصص",
 		"openRouterTransformsText": "ضغط الموجهات لتناسب حجم السياق (<a>OpenRouter Transforms</a>)",
 		"anthropicApiKey": "مفتاح Anthropic",

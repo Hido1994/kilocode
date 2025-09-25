@@ -266,6 +266,8 @@
 		},
 		"getRequestyApiKey": "Requesty APIキーを取得",
 		"getRequestyBaseUrl": "ベースURL",
+		"cortecsApiKey": "cortecs APIキー",
+		"getCortecsApiKey": "cortecs APIキーを取得",
 		"requestyUseCustomBaseUrl": "カスタムベースURLを使用する",
 		"openRouterTransformsText": "プロンプトとメッセージチェーンをコンテキストサイズに圧縮 (<a>OpenRouter Transforms</a>)",
 		"anthropicApiKey": "Anthropic APIキー",

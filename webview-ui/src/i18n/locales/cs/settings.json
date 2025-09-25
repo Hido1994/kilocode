@@ -268,6 +268,8 @@
 		},
 		"getRequestyApiKey": "Získat klíč API Requesty",
 		"getRequestyBaseUrl": "Základní URL",
+		"cortecsApiKey": "Klíč API cortecs",
+		"getCortecsApiKey": "Získat klíč API cortecs",
 		"requestyUseCustomBaseUrl": "Použít vlastní základní URL",
 		"openRouterTransformsText": "Komprimovat výzvy a řetězce zpráv na velikost kontextu (<a>Transformace OpenRouter</a>)",
 		"anthropicApiKey": "Klíč API Anthropic",

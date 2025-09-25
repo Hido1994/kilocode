@@ -265,6 +265,8 @@
 		},
 		"getRequestyApiKey": "รับคีย์ API ของ Requesty",
 		"getRequestyBaseUrl": "Base URL",
+		"cortecsApiKey": "คีย์ API ของ cortecs",
+		"getCortecsApiKey": "รับคีย์ API ของ cortecs",
 		"requestyUseCustomBaseUrl": "ใช้ Base URL ที่กำหนดเอง",
 		"openRouterTransformsText": "บีบอัดพรอมต์และสายข้อความให้มีขนาดบริบท (<a>OpenRouter Transforms</a>)",
 		"anthropicApiKey": "คีย์ API ของ Anthropic",

@@ -504,7 +504,7 @@ describe("ClineProvider", () => {
 		// Verify Content Security Policy contains the necessary PostHog domains
 		expect(mockWebviewView.webview.html).toContain(
 			// kilocode_change: added localhost:3000
-			"connect-src vscode-webview://test-csp-source https://* http://localhost:3000 https://openrouter.ai https://api.requesty.ai https://us.i.posthog.com https://us-assets.i.posthog.com",
+			"connect-src vscode-webview://test-csp-source https://* http://localhost:3000 https://openrouter.ai https://api.requesty.ai https://api.cortecs.ai https://cortecs.ai https://us.i.posthog.com https://us-assets.i.posthog.com",
 		)
 
 		// Extract the script-src directive section and verify required security elements
@@ -2700,6 +2700,7 @@ describe("ClineProvider - Router Models", () => {
 				openRouterApiKey: "openrouter-key",
 				requestyApiKey: "requesty-key",
 				glamaApiKey: "glama-key",
+				cortecsApiKey: "cortecs-key",
 				unboundApiKey: "unbound-key",
 				litellmApiKey: "litellm-key",
 				litellmBaseUrl: "http://localhost:4000",
@@ -2730,6 +2731,7 @@ describe("ClineProvider - Router Models", () => {
 		expect(getModels).toHaveBeenCalledWith({ provider: "openrouter", apiKey: "openrouter-key" }) // kilocode_change: apiKey
 		expect(getModels).toHaveBeenCalledWith({ provider: "requesty", apiKey: "requesty-key" })
 		expect(getModels).toHaveBeenCalledWith({ provider: "glama" })
+		expect(getModels).toHaveBeenCalledWith({ provider: "cortecs", apiKey: "cortecs-key" })
 		expect(getModels).toHaveBeenCalledWith({ provider: "unbound", apiKey: "unbound-key" })
 		expect(getModels).toHaveBeenCalledWith({ provider: "vercel-ai-gateway" })
 		expect(getModels).toHaveBeenCalledWith({
@@ -2746,6 +2748,7 @@ describe("ClineProvider - Router Models", () => {
 				openrouter: mockModels,
 				requesty: mockModels,
 				glama: mockModels,
+				cortecs: mockModels,
 				unbound: mockModels,
 				litellm: mockModels,
 				"kilocode-openrouter": mockModels,
@@ -2765,6 +2768,7 @@ describe("ClineProvider - Router Models", () => {
 				openRouterApiKey: "openrouter-key",
 				requestyApiKey: "requesty-key",
 				glamaApiKey: "glama-key",
+				cortecsApiKey: "cortecs-key",
 				unboundApiKey: "unbound-key",
 				litellmApiKey: "litellm-key",
 				litellmBaseUrl: "http://localhost:4000",
@@ -2781,6 +2785,7 @@ describe("ClineProvider - Router Models", () => {
 			.mockResolvedValueOnce(mockModels) // openrouter success
 			.mockRejectedValueOnce(new Error("Requesty API error")) // requesty fail
 			.mockResolvedValueOnce(mockModels) // glama success
+			.mockResolvedValueOnce(mockModels) // cortecs success
 			.mockRejectedValueOnce(new Error("Unbound API error")) // unbound fail
 			.mockRejectedValueOnce(new Error("Kilocode-OpenRouter API error")) // kilocode-openrouter fail
 			.mockRejectedValueOnce(new Error("Ollama API error")) // kilocode_change
@@ -2798,6 +2803,7 @@ describe("ClineProvider - Router Models", () => {
 				openrouter: mockModels,
 				requesty: {},
 				glama: mockModels,
+				cortecs: mockModels,
 				unbound: {},
 				ollama: {},
 				lmstudio: {},
@@ -2854,6 +2860,7 @@ describe("ClineProvider - Router Models", () => {
 				openRouterApiKey: "openrouter-key",
 				requestyApiKey: "requesty-key",
 				glamaApiKey: "glama-key",
+				cortecsApiKey: "cortecs-key",
 				unboundApiKey: "unbound-key",
 				// No litellm config
 			},
@@ -2890,6 +2897,7 @@ describe("ClineProvider - Router Models", () => {
 				openRouterApiKey: "openrouter-key",
 				requestyApiKey: "requesty-key",
 				glamaApiKey: "glama-key",
+				cortecsApiKey: "cortecs-key",
 				unboundApiKey: "unbound-key",
 				// No litellm config
 			},
@@ -2918,6 +2926,7 @@ describe("ClineProvider - Router Models", () => {
 				openrouter: mockModels,
 				requesty: mockModels,
 				glama: mockModels,
+				cortecs: mockModels,
 				unbound: mockModels,
 				litellm: {},
 				"kilocode-openrouter": mockModels,

@@ -265,6 +265,8 @@
 		},
 		"getRequestyApiKey": "Obtenir clau API de Requesty",
 		"getRequestyBaseUrl": "URL base",
+		"cortecsApiKey": "Clau API de cortecs",
+		"getCortecsApiKey": "Obtenir clau API de cortecs",
 		"requestyUseCustomBaseUrl": "Utilitza l'URL base personalitzada",
 		"openRouterTransformsText": "Comprimir prompts i cadenes de missatges a la mida del context (<a>Transformacions d'OpenRouter</a>)",
 		"anthropicApiKey": "Clau API d'Anthropic",

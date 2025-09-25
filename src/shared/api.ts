@@ -22,6 +22,7 @@ const routerNames = [
 	"openrouter",
 	"requesty",
 	"glama",
+	"cortecs",
 	"unbound",
 	"litellm",
 	"kilocode-openrouter",
@@ -148,6 +149,7 @@ export const getModelMaxOutputTokens = ({
 
 export type GetModelsOptions =
 	| { provider: "openrouter"; apiKey?: string; baseUrl?: string } // kilocode_change: add apiKey, baseUrl
+	| { provider: "cortecs"; apiKey?: string; baseUrl?: string }
 	| { provider: "glama" }
 	| { provider: "requesty"; apiKey?: string; baseUrl?: string }
 	| { provider: "unbound"; apiKey?: string }

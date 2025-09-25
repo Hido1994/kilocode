@@ -265,6 +265,8 @@
 		},
 		"getRequestyApiKey": "Requesty API-sleutel ophalen",
 		"getRequestyBaseUrl": "Basis-URL",
+		"cortecsApiKey": "cortecs API-sleutel",
+		"getCortecsApiKey": "cortecs API-sleutel ophalen",
 		"requestyUseCustomBaseUrl": "Gebruik aangepaste basis-URL",
 		"openRouterTransformsText": "Comprimeer prompts en berichtreeksen tot de contextgrootte (<a>OpenRouter Transforms</a>)",
 		"anthropicApiKey": "Anthropic API-sleutel",
