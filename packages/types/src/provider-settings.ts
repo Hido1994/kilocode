@@ -141,6 +141,7 @@ const cortecsSchema = baseProviderSettingsSchema.extend({
 	cortecsBaseUrl: z.string().optional(),
 	cortecsApiKey: z.string().optional(),
 	cortecsModelId: z.string().optional(),
+	cortecsRoutingPreference: z.string().optional(),
 })
 
 const glamaSchema = baseProviderSettingsSchema.extend({

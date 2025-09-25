@@ -267,6 +267,15 @@
 		"getRequestyBaseUrl": "URL base",
 		"cortecsApiKey": "Clave API de cortecs",
 		"getCortecsApiKey": "Obtener clave API de cortecs",
+		"cortecsRoutingPreference": {
+			"title": "Preferencia de enrutamiento",
+			"options": {
+				"default": "Predeterminado",
+				"cost": "Costo",
+				"speed": "Velocidad",
+				"balanced": "Equilibrado"
+			}
+		},
 		"requestyUseCustomBaseUrl": "Utilice una URL base personalizada",
 		"openRouterTransformsText": "Comprimir prompts y cadenas de mensajes al tamaño del contexto (<a>Transformaciones de OpenRouter</a>)",
 		"anthropicApiKey": "Clave API de Anthropic",

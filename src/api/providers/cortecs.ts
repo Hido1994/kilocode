@@ -15,9 +15,13 @@ import { getModelParams } from "../transform/model-params"
 import { DEFAULT_HEADERS } from "./constants"
 import { BaseProvider } from "./base-provider"
 import type { SingleCompletionHandler, ApiHandlerCreateMessageMetadata } from "../index"
-import { getApiRequestTimeout } from "./utils/timeout-config"
+
 import { handleOpenAIError } from "./utils/openai-error-handler"
 import { getModels } from "./fetchers/modelCache"
+
+type CortecsChatCompletionCreateParams = OpenAI.Chat.ChatCompletionCreateParams & {
+	preference?: string | null
+}
 
 export class CortecsHandler extends BaseProvider implements SingleCompletionHandler {
 	protected options: ApiHandlerOptions
@@ -103,7 +107,7 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 				})
 			}
 
-			const requestOptions: OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming = {
+			const requestOptions: CortecsChatCompletionCreateParams = {
 				model: modelId,
 				messages: convertedMessages,
 				stream: true as const,
@@ -121,6 +125,8 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 
 			// Add max_tokens if needed
 			this.addMaxTokensIfNeeded(requestOptions, modelInfo)
+			// Add routing preference if needed
+			this.addRoutingPreferenceIfNeeded(requestOptions)
 
 			let stream
 			try {
@@ -174,13 +180,15 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 				content: systemPrompt,
 			}
 
-			const requestOptions: OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming = {
+			const requestOptions: CortecsChatCompletionCreateParams = {
 				model: modelId,
 				messages: [systemMessage, ...convertToOpenAiMessages(messages)],
 			}
 
 			// Add max_tokens if needed
 			this.addMaxTokensIfNeeded(requestOptions, modelInfo)
+			// Add routing preference if needed
+			this.addRoutingPreferenceIfNeeded(requestOptions)
 
 			let response
 			try {
@@ -225,13 +233,15 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 			const model = this.getModel()
 			const modelInfo = model.info
 
-			const requestOptions: OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming = {
+			const requestOptions: CortecsChatCompletionCreateParams = {
 				model: model.id,
 				messages: [{ role: "user", content: prompt }],
 			}
 
 			// Add max_tokens if needed
 			this.addMaxTokensIfNeeded(requestOptions, modelInfo)
+			// Add routing preference if needed
+			this.addRoutingPreferenceIfNeeded(requestOptions)
 
 			let response
 			try {
@@ -258,7 +268,7 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 		const modelInfo = this.getModel().info
 
 		if (this.options.openAiStreamingEnabled ?? true) {
-			const requestOptions: OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming = {
+			const requestOptions: CortecsChatCompletionCreateParams = {
 				model: modelId,
 				messages: [
 					{
@@ -276,6 +286,8 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 			// but they do support max_completion_tokens (the modern OpenAI parameter)
 			// This allows O3 models to limit response length when includeMaxTokens is enabled
 			this.addMaxTokensIfNeeded(requestOptions, modelInfo)
+			// Add routing preference if needed
+			this.addRoutingPreferenceIfNeeded(requestOptions)
 
 			let stream
 			try {
@@ -286,7 +298,7 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 
 			yield* this.handleStreamResponse(stream)
 		} else {
-			const requestOptions: OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming = {
+			const requestOptions: CortecsChatCompletionCreateParams = {
 				model: modelId,
 				messages: [
 					{
@@ -303,6 +315,8 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 			// but they do support max_completion_tokens (the modern OpenAI parameter)
 			// This allows O3 models to limit response length when includeMaxTokens is enabled
 			this.addMaxTokensIfNeeded(requestOptions, modelInfo)
+			// Add routing preference if needed
+			this.addRoutingPreferenceIfNeeded(requestOptions)
 
 			let response
 			try {
@@ -352,17 +366,22 @@ export class CortecsHandler extends BaseProvider implements SingleCompletionHand
 	 * Note: max_tokens is deprecated in favor of max_completion_tokens as per OpenAI documentation
 	 * O3 family models handle max_tokens separately in handleO3FamilyMessage
 	 */
-	protected addMaxTokensIfNeeded(
-		requestOptions:
-			| OpenAI.Chat.Completions.ChatCompletionCreateParamsStreaming
-			| OpenAI.Chat.Completions.ChatCompletionCreateParamsNonStreaming,
-		modelInfo: ModelInfo,
-	): void {
+	protected addMaxTokensIfNeeded(requestOptions: CortecsChatCompletionCreateParams, modelInfo: ModelInfo): void {
 		// Only add max_completion_tokens if includeMaxTokens is true
 		if (this.options.includeMaxTokens === true) {
 			// Use user-configured modelMaxTokens if available, otherwise fall back to model's default maxTokens
 			// Using max_completion_tokens as max_tokens is deprecated
 			requestOptions.max_completion_tokens = this.options.modelMaxTokens || modelInfo.maxTokens
+		}
+	}
+
+	protected addRoutingPreferenceIfNeeded(requestOptions: CortecsChatCompletionCreateParams): void {
+		if (
+			this.options.cortecsRoutingPreference !== undefined &&
+			this.options.cortecsRoutingPreference !== null &&
+			this.options.cortecsRoutingPreference !== "default"
+		) {
+			requestOptions.preference = this.options.cortecsRoutingPreference
 		}
 	}
 }

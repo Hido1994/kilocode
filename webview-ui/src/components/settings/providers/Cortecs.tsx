@@ -2,14 +2,19 @@ import { useCallback, useState } from "react"
 import { Checkbox } from "vscrui"
 import { VSCodeTextField } from "@vscode/webview-ui-toolkit/react"
 
-import { type ProviderSettings, type OrganizationAllowList, cortecsDefaultModelId } from "@roo-code/types"
+import {
+	type ProviderSettings,
+	type OrganizationAllowList,
+	cortecsDefaultModelId,
+	ROUTING_PREFERENCES,
+} from "@roo-code/types"
 
 import type { RouterModels } from "@roo/api"
 
 import { vscode } from "@src/utils/vscode"
 import { useAppTranslation } from "@src/i18n/TranslationContext"
 import { VSCodeButtonLink } from "@src/components/common/VSCodeButtonLink"
-import { Button } from "@src/components/ui"
+import { Button, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@src/components/ui"
 
 import { inputEventTransform } from "../transforms"
 
@@ -97,6 +102,25 @@ export const Cortecs = ({
 					</div>
 				</>
 			)}
+			<div>
+				<label className="block font-medium mb-1">
+					{t("settings:providers.cortecsRoutingPreference.title")}
+				</label>
+				<Select
+					value={apiConfiguration?.cortecsRoutingPreference || ""}
+					onValueChange={(value) => setApiConfigurationField("cortecsRoutingPreference", value)}>
+					<SelectTrigger className="w-full">
+						<SelectValue placeholder={t("settings:common.select")} />
+					</SelectTrigger>
+					<SelectContent>
+						{ROUTING_PREFERENCES.map(({ value, label }) => (
+							<SelectItem key={value} value={value}>
+								{t(label)}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+			</div>
 			<Button
 				variant="outline"
 				onClick={() => {
