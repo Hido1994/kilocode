@@ -1,7 +1,7 @@
 ---
-"kilocode-docs": patch
+"kilocode-docs": minor
+"kilo-code": minor
 "@roo-code/types": patch
-"kilo-code": patch
 ---
 
 Add cortecs as an API provider
